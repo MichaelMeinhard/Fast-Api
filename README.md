@@ -1,6 +1,7 @@
 # Fast-Api
 
 Fast Api with scraping included using BeautifulSoup
+
 Automatic scraping while starting API
 
 ## Methods:
