@@ -1,4 +1,4 @@
-# Fast-Api
+# Fast-Api :tada:
 
 Fast Api with scraping included using BeautifulSoup
 
