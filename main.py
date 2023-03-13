@@ -69,7 +69,7 @@ app = FastAPI(title="Top Serialy", version="0.1", docs_url="/docs")
 app.is_shutdown = False
 
 
-@app.get("/series", response_model=list[Series], description="Vrátí seznam filmů")
+@app.get("/series", response_model=list[Series], description="Vrátí seznam seriálů")
 async def get_series():
     return db.get_all()
 
@@ -79,29 +79,29 @@ async def get_serie(id_serie: int):
     return db.get(id_serie)
 
 
-@app.post("/series", response_model=Series, description="Přidáme film do DB")
+@app.post("/series", response_model=Series, description="Přidáme seriál do DB")
 async def post_series(serie: Series):
     db.add(serie)
     return serie
 
 
-@app.delete("/series/{id_serie}", description="Sprovodíme film ze světa", responses={
+@app.delete("/series/{id_serie}", description="Sprovodíme seriál ze světa", responses={
     404: {'model': Problem}
 })
 async def delete_serie(id_serie: int):
     serie = db.get(id_serie)
     if serie is None:
-        raise HTTPException(404, "Film neexistuje")
+        raise HTTPException(404, "Seriál neexistuje")
     db.delete(id_serie)
     return {'status': 'smazano'}
 
 
-@app.patch("/series/{id_serie}", description="Aktualizujeme film do DB", responses={
+@app.patch("/series/{id_serie}", description="Aktualizujeme seriál do DB", responses={
     404: {'model': Problem}
 })
 async def update_serie(id_serie: int, updated_serie: Series):
     serie = db.get(id_serie)
     if serie is None:
-        raise HTTPException(404, "Film neexistuje")
+        raise HTTPException(404, "Seriál neexistuje")
     db.update(id_serie, updated_serie)
     return {'old': serie, 'new': updated_serie}
